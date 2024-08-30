@@ -17,7 +17,7 @@ RUN echo 'ubuntu:ubuntu' | chpasswd
 
 RUN ssh-keygen -A
 
-RUN echo y | unminimize
+RUN echo 'y\ny' | unminimize
 
 EXPOSE 22
 VOLUME /home/ubuntu
