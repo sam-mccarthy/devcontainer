@@ -1,5 +1,5 @@
 # devcontainer
-A multi-purpose development container for Docker.
+A multi-purpose development container for Docker with SSH built-in.
 
 Currently intended to support Go, Rust, Python, C/C++, and C#/.NET
 Uses Ubuntu as a base and installs all necessary packages.
