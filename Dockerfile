@@ -15,6 +15,7 @@ RUN curl -s -L https://dot.net/v1/dotnet-install.sh | bash
 RUN echo 'root:root' | chpasswd
 RUN echo 'ubuntu:ubuntu' | chpasswd
 
+RUN mkdir -p /run/sshd
 RUN ssh-keygen -A
 
 RUN echo 'y\ny' | unminimize
