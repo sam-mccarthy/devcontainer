@@ -2,7 +2,7 @@ FROM ubuntu
 USER root
 
 COPY --from=golang /usr/local/go/ /usr/local/go/
-COPY --from=rust /usr/local/cargo/ /usr/local/cargo/
+COPY --from=rust /usr/local/cargo/ /usr/local/rustup/ /usr/local/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
 
 ARG APT_PKGS="curl sudo vim openssh-server build-essential cmake cppcheck valgrind clang lldb llvm gdb"
