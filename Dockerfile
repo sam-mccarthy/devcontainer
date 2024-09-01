@@ -1,25 +1,27 @@
 FROM ubuntu
 USER root
 
+RUN echo 'y\ny' | unminimize
+RUN echo 'root:root' | chpasswd
+RUN echo 'ubuntu:ubuntu' | chpasswd
+
 COPY --from=golang /usr/local/go/ /usr/local/go/
-COPY --from=rust /usr/local/cargo/ /usr/local/rustup/ /usr/local/
+COPY --from=rust /usr/local/cargo/ /usr/local/cargo/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
 
-ARG APT_PKGS="curl sudo vim openssh-server build-essential cmake cppcheck valgrind clang lldb llvm gdb"
+ARG APT_PKGS="curl sudo vim openssh-server build-essential cmake cppcheck valgrind clang lldb llvm gdbdotnet-sdk-8.0"
 RUN \
     echo "--[ Installing packages ]--" && \
     apt-get update && \
     apt-get install -y ${APT_PKGS}
-RUN curl -s -L https://dot.net/v1/dotnet-install.sh | bash
-
-RUN echo 'root:root' | chpasswd
-RUN echo 'ubuntu:ubuntu' | chpasswd
 
 RUN mkdir -p /run/sshd
 RUN ssh-keygen -A
 
-RUN echo 'y\ny' | unminimize
+RUN echo "export PATH=${PATH}:/usr/local/go/bin:/usr/local/cargo/bin:/usr/local/rustup/bin" >> /etc/profile.d/02-path-fix.sh
+
+RUN /usr/local/cargo/bin/rustup default stable
 
 EXPOSE 22
-VOLUME /home/ubuntu
+VOLUME /home/ubuntu /etc/ssh/ /etc/passwd
 CMD ["/usr/sbin/sshd", "-D"]
