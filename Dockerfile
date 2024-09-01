@@ -23,5 +23,4 @@ RUN echo "export PATH=${PATH}:/usr/local/go/bin:/usr/local/cargo/bin:/usr/local/
 RUN /usr/local/cargo/bin/rustup default stable
 
 EXPOSE 22
-VOLUME /home/ubuntu /etc/ssh
 CMD ["/usr/sbin/sshd", "-D"]
