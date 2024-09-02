@@ -9,7 +9,7 @@ COPY --from=golang /usr/local/go/ /usr/local/go/
 COPY --from=rust /usr/local/cargo/ /usr/local/cargo/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
 
-ARG APT_PKGS="curl sudo vim openssh-server build-essential cmake cppcheck valgrind clang lldb llvm gdb dotnet-sdk-8.0"
+ARG APT_PKGS="curl sudo vim openssh-server build-essential cmake cppcheck valgrind clang lldb llvm gdb dotnet-sdk-8.0 git man"
 RUN \
     echo "--[ Installing packages ]--" && \
     apt-get update && \
